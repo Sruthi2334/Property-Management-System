@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Listing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+.top-bar {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center; 
+}
+
+.top-bar .contact-info i,
+.top-bar .auth-links a i {
+    margin-right: 5px;
+}
+.auth-links{
+    margin-left: auto;
+}
+.auth-links a {
+    color: white;
+    text-decoration: none;
+    margin:0;
+    padding:0;
+    display:inline-block
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.auth-links a + a::before {
+    content: "|";
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    color: white;
+}
+
+.navbar {
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo h1 {
+    margin: 0;
+    color: #333;
+}
+
+.logo span {
+    color: #4CAF50;
+}
+
+.menu a {
+    margin-left: 20px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    color: #4CAF50;
+}
+
+.submit-property {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.submit-property:hover { 
+    background-color: #45a049;
+}
+
+.maintenance-request {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.maintenance-request:hover {
+    background-color: #45a049;
+}
+
+        .property-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 16px;
+            max-width: 300px;
+            margin: 20px auto;
+        }
+        .property-image {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .property-details {
+            margin-top: 16px;
+        }
+        .property-price {
+            color: green;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .property-size {
+            font-size: 16px;
+            color: #555;
+        }
+        .property-info {
+            margin-top: 8px;
+        }
+        .property-info div {
+            margin-bottom: 4px;
+        }
+        .property-info .icon {
+            margin-right: 8px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="auth-links">
+                {% if 'email' in session %}
+                    <span>Welcome, {{ session['email'] }}!</span>
+                    <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="{{ url_for('register') }}"><i class="fas fa-user-plus"></i> Register</a>
+                {% endif %}
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>HOME<span>HUB</span></h1>
+            </div>
+            <div class="menu">
+                <a href="{{ url_for('main') }}">Home</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="{{ url_for('properties') }}">Properties</a>
+                <a href="{{ url_for('agent') }}">Agent</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+            </div>
+            {% if 'email' in session and session.get('role') == 'Seller' %}
+                <a href="{{ url_for('submit_option') }}" class="submit-property">Submit Property</a>
+            {% elif 'email' not in session %}
+                <a href="{{ url_for('login') }}" class="submit-property">Submit Property</a>
+            {% endif %}
+        </nav>
+    </header>    
+
+    {% for land in lands %}
+    <div class="property-card">
+        {% if land.PropertyImage %}
+            <img src="{{ url_for('static', filename='lands/' ~ land.PropertyImage) }}" alt="Land Image" class="property-image">
+        {% else %} 
+            <p>No Image Available</p>
+        {% endif %}
+        <div class="property-details">
+            <div class="property-price">₹{{ land.Price }}</div>
+            <div class="property-area">{{ land.Area }} Acres</div>
+            <div class="property-info">
+                <div><span class="icon">📍</span>{{ land.Landmark }}, {{ land.Address }}, {{ land.Pincode }}</div>
+                <div><span class="icon">📞</span>{{ land.Phone }}</div>
+                <div><span class="icon">📧</span>{{ land.Email }}</div>
+                <div><span class="icon">🌱</span>Land Type: {{ land.LandType }}</div>
+                <div><span class="icon">🔲</span>Boundary Details: {{ land.BoundaryDetails }}</div>
+                <div><span class="icon">🔄</span>Status: {{ land.Status }}</div>
+                <div><span class="icon">✅</span>No Outstanding Loan</div>
+                <div><span class="icon">🏷️</span>Nearby Facility: {{ land.NearbyFacility }}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}    
+</body>
+</html>

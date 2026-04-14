@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submit Property</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='submitproperty.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="top-bar">
+        <div class="auth-links">
+          {% if 'email' in session %}
+          <span>Welcome, {{ session['email'] }}!</span>
+          <!-- Assuming you store 'username' in the session -->
+          <a href="{{ url_for('logout') }}"
+            ><i class="fas fa-sign-out-alt"></i> Logout</a
+          >
+          {% else %}
+          <a href="{{ url_for('login') }}"
+            ><i class="fas fa-sign-in-alt"></i> Login</a
+          >
+          <a href="{{ url_for('register') }}"
+            ><i class="fas fa-user-plus"></i> Register</a
+          >
+          {% endif %}
+        </div>
+      </div>
+
+      <nav class="navbar">
+        <div class="logo">
+          <h1>HOME<span>HUB</span></h1>
+        </div>
+        <div class="menu">
+          <a href="{{ url_for('main') }}">Home</a>
+          <a href="{{ url_for('about') }}">About</a>
+          <a href="{{ url_for('properties') }}">Properties</a>
+          <a href="{{ url_for('agent') }}">Agent</a>
+          <a href="{{ url_for('contact') }}">Contact</a>
+        </div>
+        <a href="{{ url_for('submitproperty') }}" class="submit-property"
+          >Submit Property</a
+        >
+      </nav>
+    </header>
+
+    <div class="container">
+      <h1>Submit Property</h1>
+
+      <form action="{{ url_for('submitproperty') }}" method="POST" enctype="multipart/form-data">
+        <!-- Personal Info Section -->
+        <section class="form-section">
+          <h2>Personal Information</h2>
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your name"
+            required
+          />
+
+          <label for="phone">Phone</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Enter your phone number"
+            required
+          />
+
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+        </section>
+
+        <!--loan details -->
+        <section class="form-section">
+          <h2>Outstanding Loans</h2>
+          <label for="outstandingloan">Have you taken Outstanding Loans?</label>
+          <select id="outstandingloan" name="outstandingloan" onchange="LoanDetails()">
+            <option value="select">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+          <div id="loan-details" style="display: none; margin-top: 10px">
+
+            <label for="loanAmount">Loan Amount (in Rs):</label>
+            <input
+              type="number"
+              id="loanAmount"
+              name="loanAmount"
+              placeholder="Enter loan amount"
+              required
+            />
+
+            <label for="loanBalance">Current Loan Balance (in Rs):</label>
+            <input
+              type="number"
+              id="loanBalance"
+              name="loanBalance"
+              placeholder="Enter remaining balance"
+              required
+            />
+
+            <label for="lenderName">Lender's Name:</label>
+            <input
+              type="text"
+              id="lenderName"
+              name="lenderName"
+              placeholder="Enter lender name"
+              required
+            />
+
+            <label for="nextRepayment">Next Repayment Due Date:</label>
+            <input
+              type="date"
+              id="nextRepayment"
+              name="nextRepayment"
+              required
+            />
+
+            <label for="loanDocument">Upload Loan Statement or Proof:</label>
+            <input
+              type="file"
+              id="loanDocument"
+              name="loanDocument"
+              accept=".pdf,.jpg,.png"
+              required
+            />
+          </div>
+        </section>
+
+        <!-- Property Details Section -->
+        <section class="form-section">
+          <h2>Property Submission Details</h2>
+          <label for="propertyType">Property Type</label>
+          <select
+            id="propertyType"
+            name="propertyType"
+            onchange="showPropertyDetails()"
+          >
+            <option value="">Select Type</option>
+            <option value="land">Land</option>
+            <option value="villa">Villa</option>
+            <option value="apartment">Apartment</option>
+            <option value="house">Individual House</option>
+          </select>
+
+          <!-- Apartment Details -->
+          <div id="apartmentDetails" class="property-details">
+            <label for="sqFeet">Sq Feet</label>
+            <input
+              type="number"
+              id="sqFeet"
+              name="sqFeet"
+              placeholder="Enter area in sq feet"
+            />
+
+            <label for="floorNo">Floor No</label>
+            <input
+              type="number"
+              id="floorNo"
+              name="floorNo"
+              placeholder="Enter floor number"
+            />
+
+            <label for="totalfloors">Total Floors</label>
+            <input
+              type="number"
+              id="totalfloors"
+              name="totalfloors"
+              placeholder="Enter total floors"
+            />
+
+            <label for="bhknumber">BHK Number</label>
+            <input
+              type="number"
+              id="bhknumber"
+              name="bhknumber"
+              placeholder="Enter BHK"
+            />
+
+            <label for="kitchendetail">Kitchen Details</label>
+            <select id="kitchendetail" name="kitchendetail" required>
+              <option value="select">Select</option>
+              <option value="modular">Modular</option>
+              <option value="traditional">Traditional</option>
+            </select>
+
+            <label for="direction"
+              >Facing Direction
+              <details></details
+            ></label>
+            <select id="direction" name="direction" required>
+              <option value="select">Select</option>
+              <option value="east">East</option>
+              <option value="west">West</option>
+              <option value="north">North</option>
+              <option value="south">South</option>
+            </select>
+
+            <label for="amenties">Amenties</label>
+            <input
+              type="text"
+              id="amenties"
+              name="amenties"
+              placeholder="Enter amenties present"
+            />
+          </div>
+
+          <!-- Villa Details -->
+          <div id="villaDetails" class="property-details">
+            <label for="constructionstatus">Construction Status</label>
+            <select id="constructionstatus" name="constructionstatus" required>
+              <option value="select">Select</option>
+              <option value="completedconstruction">
+                Completed Construction
+              </option>
+              <option value="undercontruction">Under Contruction</option>
+              <option value="underrenovation">Under Renovation</option>
+            </select>
+
+            <label for="villaFloors">Number of Floors</label>
+            <input
+              type="number"
+              id="villaFloors"
+              name="villaFloors"
+              placeholder="Enter number of floors"
+            />
+
+            <label for="villaRooms">Rooms</label>
+            <input
+              type="number"
+              id="villaRooms"
+              name="villaRooms"
+              placeholder="Enter number of rooms"
+            />
+
+            <label for="kitchendetail">Kitchen Detaila</label>
+            <select id="kitchendetail" name="kitchendetail" required>
+              <option value="select">Select</option>
+              <option value="modular">Modular</option>
+              <option value="traditional">Traditional</option>
+            </select>
+
+            <label for="securitysystem">Security System</label>
+            <select id="securitysystem" name="securitysystem" required>
+              <option value="select">Select</option>
+              <option value="guards">Guards</option>
+              <option value="gates">Gates</option>
+              <option value="surveillence">surveillence</option>
+            </select>
+
+            <label for="amenties">Amenties</label>
+            <input
+              type="text"
+              id="amenties"
+              name="amenties"
+              placeholder="Enter amenties present(water supply/electicity supply etc)"
+            />
+
+            <label for="sqFeet">Sq Feet</label>
+            <input
+              type="number"
+              id="sqFeet"
+              name="sqFeet"
+              placeholder="Enter area in sq feet"
+            />
+          </div>
+
+          <!-- Land Details -->
+          <div id="landDetails" class="property-details">
+            <label for="landArea">Area (in Sq Feet)</label>
+            <input
+              type="number"
+              id="landArea"
+              name="landArea"
+              placeholder="Enter land area"
+            />
+
+            <label for="zoninginformationType">Zoning Information</label>
+            <select
+              id="zoninginformationType"
+              name="zoninginformationType"
+              onchange="showzoninginformation()"
+            >
+              <option value="">Select Type</option>
+              <option value="residential">Residential</option>
+              <option value="commercial">Commercial</option>
+              <option value="argiculture">Agriculture</option>
+              <option value="industry">Industry</option>
+            </select>
+
+            <label for="pattaImage">Image of Patta</label>
+            <input
+              type="file"
+              id="pattaImage"
+              name="pattaImage"
+              accept="image/*"
+              required
+            />
+
+            <label for="dtcp-approval">DTCP-Approval</label>
+            <select id="dtcp-approval" name="dtcp-approval" required>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          <!-- Individual House Details -->
+          <div id="houseDetails" class="property-details">
+            <label for="houseRooms">Number of Rooms</label>
+            <input
+              type="number"
+              id="houseRooms"
+              name="houseRooms"
+              placeholder="Enter number of rooms"
+            />
+
+            <label for="houseArea">House Area (in Sq Feet)</label>
+            <input
+              type="number"
+              id="houseArea"
+              name="houseArea"
+              placeholder="Enter house area"
+            />
+
+            <label for="kitchenType">Kitchen Type</label>
+            <select id="kitchenType" name="kitchenType" required>
+              <option value="">Select</option>
+              <option value="modular">Modular</option>
+              <option value="traditional">Traditional</option>
+            </select>
+
+            <label for="storageSpaces">Storage Spaces</label>
+            <input
+              type="text"
+              id="storageSpaces"
+              name="storageSpaces"
+              placeholder="Mention storage spaces (e.g., built-in wardrobes, cabinets)"
+            />
+
+            <label for="floorPlan">Floor Plan</label>
+            <input
+              type="file"
+              id="floorPlan"
+              name="floorPlan"
+              accept="image/*"
+            />
+          </div>
+
+          <label for="status">Status</label>
+          <select id="status" name="status" required>
+            <option value="available">Available</option>
+            <option value="sold">Sold</option>
+          </select>
+
+          <label for="propertyImage">Image of Property</label>
+          <input
+            type="file"
+            id="propertyImage"
+            name="propertyImage"
+            accept="image/*"
+            required
+          />
+        </section>
+
+        <!-- Price & Location Section -->
+        <section class="form-section">
+          <h2>Price & Location</h2>
+          <label for="price">Price</label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            placeholder="Enter price"
+            required
+          />
+
+          <label for="landmark">Landmark</label>
+          <input
+            type="text"
+            id="landmark"
+            name="landmark"
+            placeholder="Enter landmark"
+            required
+          />
+
+          <label for="facility">Nearby Facility</label>
+          <select id="facility" name="nearbyfacility" required>
+            <option value="">Select Type</option>
+            <option value="hospital">Hospital</option>
+            <option value="school">School</option>
+            <option value="market">Market</option>
+            <option value="shoppingmall">Shopping Mall</option>
+          </select>
+
+          <label for="address">Address</label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            placeholder="Enter address"
+            required
+          />
+
+          <label for="pincode">Pincode</label>
+          <input
+            type="number"
+            id="pincode"
+            name="pincode"
+            placeholder="Enter pincode"
+            required
+          />
+        </section>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <script>
+      function showPropertyDetails() {
+        var propertyType = document.getElementById("propertyType").value;
+        document.getElementById("apartmentDetails").style.display = "none";
+        document.getElementById("villaDetails").style.display = "none";
+        document.getElementById("landDetails").style.display = "none";
+        document.getElementById("houseDetails").style.display = "none";
+
+        if (propertyType === "apartment") {
+          document.getElementById("apartmentDetails").style.display = "block";
+        } else if (propertyType === "villa") {
+          document.getElementById("villaDetails").style.display = "block";
+        } else if (propertyType === "land") {
+          document.getElementById("landDetails").style.display = "block";
+        } else if (propertyType === "house") {
+          document.getElementById("houseDetails").style.display = "block";
+        }
+      }
+
+      function LoanDetails() {
+        var loanSelect = document.getElementById("outstandingloan").value;
+        var loanDetails = document.getElementById("loan-details");
+    
+        if (loanSelect === "yes") {
+          loanDetails.style.display = "block";
+        } else {
+          loanDetails.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>

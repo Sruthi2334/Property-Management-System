@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Request</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='maintenance_request.css') }}">
+</head>
+<body>
+    <!-- Top Bar -->
+    <header>
+        <div class="top-bar">
+            <div class="auth-links">
+                {% if session['email'] %}
+                    <span>Welcome, {{ session['email'] }}!</span>
+                    <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">Login</a>
+                {% endif %}
+            </div>
+        </div>
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="logo">
+                <h1>HOME<span>HUB</span></h1>
+            </div>
+            <div class="menu">
+                <a href="{{ url_for('main') }}">Home</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="{{ url_for('properties') }}">Properties</a>
+                <a href="{{ url_for('agent') }}">Agent</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Form Section -->
+    <main>
+        <div class="container">
+            <h1>Maintenance Request</h1>
+            <!-- Maintenance Request Form -->
+            <form id="maintenanceForm" method="POST" action="{{ url_for('maintenance_request') }}" enctype="multipart/form-data">
+                <h2>Personal Information</h2>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                <h2>Maintenance Details</h2>
+
+                <!-- Property Type -->
+                <label for="propertyType">Property Type</label>
+                <select id="propertyType" name="propertyType" required>
+                    <option value="">Select</option>
+                    <option value="apartment">Apartment</option>
+                    <option value="villa">Villa</option>
+                    <option value="house">House</option>
+                    <option value="land">Land</option>
+                </select>
+
+                <!-- Request Date -->
+                <label for="submissionDate">Date of Request</label>
+                <input type="date" id="submissionDate" name="submissionDate" required>
+
+                <!-- Property Address -->
+                <label for="propertyAddress">Property Address</label>
+                <input type="text" id="propertyAddress" name="propertyAddress" placeholder="Enter property address" required>
+
+                <!-- Preferred Time -->
+                <label for="preferredTime">Preferred Time for Maintenance</label>
+                <input type="text" id="preferredTime" name="preferredTime" placeholder="Enter preferred time (e.g., 9 AM - 12 PM)">
+
+                <!-- Predefined Issue Description -->
+                <label for="issueDescription">Description of the Issue</label>
+                <select id="issueDescription" name="issueDescription" required>
+                    <option value="">Select</option>
+                    <option value="plumbing">Plumbing</option>
+                    <option value="electrical">Electrical</option>
+                    <option value="heating">Heating</option>
+                    <option value="other">Other</option>
+                </select>
+                <textarea id="otherIssueText" name="otherIssueText" placeholder="Describe the issue" style="display: none;"></textarea>
+                <!-- Priority Level -->
+                <label for="priority">Priority Level</label>
+                <select id="priority" name="priority" required>
+                    <option value="">Select</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+
+                <!-- Contact Information -->
+                <label for="contactInfo">Contact Information</label>
+                <input type="text" id="contactInfo" name="contactInfo" placeholder="Enter additional contact info" required>
+
+                <!-- Image Upload -->
+                
+                <label for="issueImage">Upload Image of the Issue (optional)</label>
+                <input type="file" id="issueImage" name="issueImage" accept="image/*">
+                
+                <button type="submit">Submit Request</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('issueDescription').addEventListener('change', function() {
+            if (this.value === 'other') {
+                document.getElementById('otherIssueText').style.display = 'block';
+            } else {
+                document.getElementById('otherIssueText').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

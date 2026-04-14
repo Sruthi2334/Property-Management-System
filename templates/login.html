@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property Management System</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='login.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTTX6g2XKM0P+tqKsCd5b3i7sHg5I2q1lLJEV/ytPL3Wgp4P/cyPfRX/2N6BzQGFKFNi9Vz0Iw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- Reuse the same header and navigation from your homepage -->
+    <header>
+      <div class="top-bar">
+        <div class="auth-links">
+          {% if 'email' in session %}
+          <span>Welcome, {{ session['email'] }}!</span>
+          <!-- Assuming you store 'username' in the session -->
+          <a href="{{ url_for('logout') }}"
+            ><i class="fas fa-sign-out-alt"></i> Logout</a
+          >
+          {% else %}
+          <a href="{{ url_for('login') }}"
+            ><i class="fas fa-sign-in-alt"></i> Login</a
+          >
+          <a href="{{ url_for('register') }}"
+            ><i class="fas fa-user-plus"></i> Register</a
+          >
+          {% endif %}
+        </div>
+      </div>
+
+      <nav class="navbar">
+        <div class="logo">
+          <h1>HOME<span>HUB</span></h1>
+        </div>
+        <div class="menu">
+          <a href="{{ url_for('main') }}">Home</a>
+          <a href="{{ url_for('about') }}">About</a>
+          <a href="{{ url_for('properties') }}">Properties</a>
+          <a href="{{ url_for('agent') }}">Agent</a>
+          <a href="{{ url_for('contact') }}">Contact</a>
+        </div>
+        <a href="{{ url_for('submit_option') }}" class="submit-property"
+          >Submit Property</a
+        >
+      </nav>
+    </header>
+
+    <!-- Login Form Section -->
+    <main>
+      <section class="login-container">
+        <div class="login-box">
+          <h2>Login</h2>
+          {% if error %}
+          <p style="color: red">{{ error }}</p>
+          {% endif %}
+          <p>Access to our dashboard</p>
+          <form action="#" method="POST">
+            <div class="input-group">
+              <label for="email">Your Email*</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="input-group">
+              <label for="password">Your Password*</label>
+              <input type="password" id="password" name="password" required />
+            </div>
+            <div class="input-group">
+              <label for="role">Your Role*</label>
+              <select name="role" required>
+                <option value="">Select Your Role</option>
+                <option value="seller">Seller</option>
+                <option value="buyer">Buyer</option>
+              </select>
+            </div>
+            
+            <button type="submit" class="login-button">Login</button>
+          </form>
+          <div class="register-link">
+            <p>
+              Don't have an account?
+              <a href="{{ url_for('register') }}">Register</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

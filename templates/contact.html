@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Property Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='contact.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" /> <!-- Include the CSS for the header -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTTX6g2XKM0P+tqKsCd5b3i7sHg5I2q1lLJEV/ytPL3Wgp4P/cyPfRX/2N6BzQGFKFNi9Vz0Iw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+</head>
+<body>
+    <header>
+      <div class="top-bar">
+        <div class="auth-links">
+          {% if 'email' in session %}
+          <span>Welcome, {{ session['email'] }}!</span>
+          <!-- Assuming you store 'username' in the session -->
+          <a href="{{ url_for('logout') }}"
+            ><i class="fas fa-sign-out-alt"></i> Logout</a
+          >
+          {% else %}
+          <a href="{{ url_for('login') }}"
+            ><i class="fas fa-sign-in-alt"></i> Login</a
+          >
+          <a href="{{ url_for('register') }}"
+            ><i class="fas fa-user-plus"></i> Register</a
+          >
+          {% endif %}
+        </div>
+      </div>
+
+      <nav class="navbar">
+        <div class="logo">
+          <h1>HOME<span>HUB</span></h1>
+        </div>
+        <div class="menu">
+          <a href="{{ url_for('main') }}">Home</a>
+          <a href="{{ url_for('about') }}">About</a>
+          <a href="{{ url_for('properties') }}">Properties</a>
+          <a href="{{ url_for('agent') }}">Agent</a>
+          <a href="{{ url_for('contact') }}">Contact</a>
+        </div>
+        <div class="action-buttons"></div>
+          {% if 'email' in session %}
+              {% if session.get('role') == 'Seller' %}
+                  <a href="{{ url_for('submitproperty') }}" class="submit-property">Submit Property</a>
+              {% elif session.get('role') == 'Buyer' %}
+                  <a href="{{ url_for('maintenance_request') }}" class="maintenance-request">Maintenance Request</a>
+              {% endif %}
+          {% else %}
+              <!-- Before login, show only 'Submit Property' or 'Maintenance Request' option -->
+              <a href="{{ url_for('login') }}" class="submit-property">Submit Property</a>
+          {% endif %}
+      </div>
+      </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="header">
+                Need help? We've got you covered!
+            </div>
+            <div class="contact-details">
+                <div class="contact-section">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEMXUXKPAl6MlEBhOkp_r7R_-D4yTa00Btjg&s" alt="Email Icon">
+                    <h2>EMAIL</h2>
+                    <p>Send us an email through homehub@gmail.com</p>
+                </div>
+                <div class="contact-section">
+                    <img src="https://static.vecteezy.com/system/resources/previews/005/747/811/original/call-answer-icon-symbol-green-call-icon-symbol-for-web-app-logo-vector.jpg" alt="Call Icon">
+                    <h2>CALL</h2>
+                    <p>91+ 1234567890</p>
+                    <p>Monday-Saturday 9:00am-5:00pm IST</p>
+                    <p>Sunday 9:00am-12:00pm IST</p>
+                </div>
+                <div class="contact-section">
+                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxATEA8QEBAVF
+                    RUWEBATEhIRDxAQEhUQFREWGBUZFhMYHSggGBolGxUWITIiJSkrLi4uGB8zODMsNygtLisBCgoKDg0OGhA
+                    QGi0lHyUtLS0rLS0tLS0vLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSstLf/AABEIA
+                    OEA4QMBEQACEQEDEQH/xAAbAAEAAQUBAAAAAAAAAAAAAAAABQEDBAYHAv/EAD0QAAIBAgIGBwYDBgcAAAA
+                    AAAABAgMRBDEFBhIhQVEiYXGBkaGxEzJSYnLBB0LwFCMzQ5LRFlNUc6LC4f/EABoBAQACAwEAAAAAAAAAA
+                    AAAAAABBAIDBQb/xAAvEQEAAgECBAQFBAIDAAAAAAAAAQIDBBEFEiExEzJBcSJCUWGBFCORoVKx0fDx/9o
+                    ADAMBAAIRAxEAPwDuIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB5lNLNkxEyiZiO61LFwXG/YZRjswnLVb
+                    eOXIy8KWPjR9Hn9u+XzJ8H7njfZVY5cY+Y8H7njfZ7jjY9ZjOKWUZarsa0Xk0YzWYZRaJXDFkAAAAAAAAA
+                    AAAAAAAAAAAAAWauIjHrfJGdaTLC2SIYlTFyeW7s/ubYxxDTOW0rDfM2bNe+6gAASAAAQLlOvJZMxmkSyi
+                    8wy6WMT97d6Gq2KY7N1cserJT5GptVAAAAAAAAAAAAAAAAAKSkkrsmI3RM7MCvi290dy82b6Y9u6vfJM9I
+                    Yxs2a4ABIAAAAAAAAALlKtKOXgY2rFmVbTXskKFdS7eRWtWarFbxZdMWYAAAAAAAAAAAAADzOaSuyYjedo
+                    RM7RvKNr1nJ9XBFmtIqq3vzLRmxAAAAAAAAAAAAAAVjKzuiJgjokcNX2l1la9OVapfmXzBmAAAAAAAAAAA
+                    ABG4qttPqWRZpXaFa9uZYNjWAAAAAAAAAAAAAAAAPUJNO6ImN0xOyTo1dpX8SravLOy1W3NG64YsgAAAAA
+                    AAAAAxsbVstlcfQ2Y67zu1ZbbRsjyy0AQACAJAAAAAAAAAAAAAAF7C1dmXU8zXkrvDOltpSZWWgAAAAAAA
+                    ABH6Y0xRw8b1Jb37sFvnJ9S+5vwae+afhj3lozaimKPin8Mf2znaUlZtLdnbdkbYrFekNPNNusqACQAAAA
+                    AAAAAAAAAAAAABAlMLO8V4Mq3jaVqk7wumLMAAAAAABBaz6xQw0dlWlVkujHkvil1epd0ejtnneelVLV6u
+                    uCNo62aDo2U8TjKcqsnKTltNvlHfZcluyO7nrXDgmKR0cTDNs2Xe89XQUcJ2lQkIAkAAAAAAAAAAAAAAAA
+                    AgZmj5b2u805Y9W7DPeGaaW8AAAAACN0/peGGoupLe30YR+Kf9uLLGl09s+Tlj8q+p1FcFOafx7uS4zFTq
+                    zlUqO8pO7f64HqsdK0rFa9oeYve17Ta3eUxqXTviW/hpy82l9ylxC21NlrRV3ybt6Rx3XVCQAB5qTUU5SaS
+                    SbbbsklxbERv2RMxHWWtYzW+CbVKm5/M3sp9izL+PQWtG8zsoX10RO0L+jdaqVSShUXs28m3eLfJvgYZdFk
+                    pG8dWzHrK26S2Apri3iK0YRc5tKK3tt2sK1tadoRa1a13lrWK1xgnanSclzk9m/cdCnD7T5pUL6+Plhm6K1
+                    mo1WoSThJ5Ju8W+p8zVm0eTHG/eGzFrK3naU4VFxZxeKhTg51JbMVx6+SXFmVKWvPLXuwvkrSN7Nbr65R2r
+                    QotrnKVm+5LcXq8Ptt8UqNtf16QktEaw0q7UN8JvKMuPY+L6jRn0t8Ub94b8Oqrfv3TBWWgAAAv4J9NGvL2
+                    bMXmSRWWQAAAAAOU636W9viJWfQheEOWfSfe/Q9RodPGHFG/eesvNa7P4uXp2jsgy6pNj1H/AI9T/a/7I5v
+                    EfLC/ofO3Y5LrBAEgBrOu+JcadOmnum25daXAv6DHFrTM+ihrrzERENNOzs5UPNiJ7JiduroWq2LlUw0XLO
+                    LcL87ZeRwdXSK5J2dvSWm2PqidecU70qPC23Lrd2l4WfiWuHUid7eqpxC87xDVDqudAJjfund0nQGLdXD0p
+                    yzs0+txk438jzmorFMkxDuae02pEy1jXXFt1o0vyxin2ylx8Do8PptTmUNbknn5fRrp0VFWEmmmnZppprNN
+                    ZEWpFo2llEzHWHUNHV3UpU6jzlCLfbbeecyV5bzDvYpmaRMsgwbAABewfvo15OzPH3SZWWgAAAAQ+tukHRw
+                    lWSfSklCH1S3X7ld9xb0OLxc0RPbvP4Vdbl8LDMx37R+XJT1LzASJ3U2rbEpfFCS8LNehQ4hH7e65op/cb4
+                    cV2AkAAGv65YCVSlGpFXdN3aXwPN9xc0WaKX2n1U9Zim9d49Gjo7kS489BK+5K7ySWbZFpiO5G/o6Lq9gXR
+                    w8IS3Sd5SXJvgee1OSL5JmHc01ZpWIlE67aPlJQrxTeynGfVG94vzfiWuHZYi01n1V9dim0c0NPOvLlvVOE
+                    pNRirtuyS4sxtbljeU1ibTtDpWiMH7KhSpPOMel9TbcvNnnc1+e82d/BSKY4ie7WtdcBLbjXiui4qM+qSy8
+                    To8PyxtyTLn62k780Q1g6aguYehKpKMIK8pNJL79hjfJFK80laTe3LDqGDoezpwpr8sUvBHm725rTL0NK8t
+                    YhdIZAADIwK6Xcass9GzF5kiV1kAAAAGj/AIlYjdh6XXKb9F9ztcIp5rfhx+K38tfy0U7TjBIytFYn2dalU
+                    5TV+x7maNRTnxzDdivy3h05HnnejrCoAAAZB3jZD43VrDVG5bLi3nsPZu+zItU1mWkbRKtbR47Tuu4DQVCi
+                    9qMby4Sm9prs5GOTUZMneWVNNjp2SRobyUU1Zq/aR27ImInpKFxOq+GnLaSlB8oSsvB3LdNZlrHdWvosdvR
+                    l6P0NQo76cOl8UntS8TXk1GTJ5pbMemx07QzzS3bKTgmnFq6as096aETtO8ImsTG0oWvqphpO6Uo34Rnu8H
+                    kWqa7LWNt1W2jxzLO0doqjR/hws+Mn0pPvZqy575PNLbiw46dmcam4AAAM7AR3NlfLPo34Y9WWam4AAAAHO
+                    PxFlfEwXKkvNs9DwqP2p93A4rP7sezVDpuYEpGR3HQ9Wcf7XDxb96HQl2pbn3qxwNVi8PJMfV29Lfmolius
+                    gAABUgAKBIEASBAAAqEKEgEgACqREiVowtFIqWneVusbRs9kMgAAAAc5/EaFsRTfOl6NnoOEzvimPu4PFY/
+                    cifs1M6jlhKQCW1b0n7Gstr3J2jPq5PuKerweJXeO8LWlz+Hbr2dDTRwt+uztb9N1QKEgAAAAAAAAAAAAAA
+                    AAysFSu9p5L1NOS3TZtxV3ndnmhYAAAAAA0v8AEnDXhQqrhKUH3q69GdjhF/itT8uTxWnw1t+GgndcQAAGR
+                    sNy1T01tJUKr6S3U5P8y+FvmvQ5Gt0s0nnr2dPS5/ks2g5zoqEgAAAAAAAAAAAAAABco0nJ28TG1toZVrzS
+                    k4RSSSKszutRG0bPRCQAAAAAI3WLR/t8NVpcXG8Pri7x9Ld5Y0mbwstbfz7K+qw+Limv8e7kElzPW7w8ttM
+                    SoAAAeotpprc07prc7mMxzRtLKLTHZuurusKqWpVnaeSk9yn28pepxtVo5xzzV7Ong1UW2rZsZRX4UYAkAA
+                    AAAAAAAAAB6pxu0iJnaN0xG87JSlSUVZFW1pmeq1WsVjZ7MWQAAAAAAABzPXnRHsa/tYroVW31Kpm135+J6
+                    Phuo8THyz3j/Tz3ENP4eTnjtP8AtrJ0nPAAAAJ6907tj0NrROmlCtecclLOSXXzObn0MW+Ki5g1k06W7Nww
+                    uKhUjt05KS5rfbtXA5dqTWdpdSuSto3iV4xZgAAAAAAAAAAAASWFrbSs816FW9dpWcdt4XzBsAAAAAAAAMT
+                    SmAhXpTpVFuks+KfBrrRtw5rYrxerVmxVy0mlnJNLaNqYerKlUW9b4vhKPBo9Vgz1zU5qvMZsNsV5rZhm5q
+                    AAAgCRdw2JqU5bVObi+afDrWTNd8VLxtaGVb2rO8NkwGt8lZVoX+aG5+BzsnDvWkr+PXz2tCfwenMNU3Rqp
+                    P4Z9B+eZSvp8lO8LlNRjt6pBP8AWZpbt1QkAAAbw9U4N5K/YYzaI7piJnsyKeCfHd5mu2WPRtjFPqYjC23r
+                    ehTJv3RfHt2Yptagkeqc2mmjG0bwmJ2ndK05ppNFWY2nZbid43eiEgAAAAAAAETrLo2hWoSdZ7KgnJVOMN3
+                    p1FrSZsmPJHJ139Pqq6vDjyY55+m3r9HJHm7b+Ty3dh6p5hQkAAAAAAWI2F2jiakPcnKP0yaXgjCcVJ7xDP
+                    xLx2lmU9O4pfzpPtSf2NM6PFPozjUZI9V//EuL/wAxd8ImP6HF9Gz9ZkeJ6xYt/wA23ZGKJjRYo9GM6vLPR
+                    KaA0Vi8W1KpVqRo33y2nHa6opepW1WbBp42rETb/Xut6XDlz9bTtX/fs6JhcNCnCMIRtFKyS/W9nAtabTNp
+                    dytYrG0LpiyALFXCxeW59RsrkmGu2OJYk8LJcL9hsjJEtU47QtODXAz3YbL2FrbLs8mYXpvDPHfaUiV1kAA
+                    AAAAAA55r3p32kv2am+hF/vGvzTXDsXr2Hf4bpOSPFt3nt7OHxHVc0+HXtHdqB1nKAAAAAAAVAAAMjBYKrV
+                    ls0oSm/lXq8ka8mWmON7zs2Y8d8k7Ujdu2gdSYxtUxTUnmqcfcX1P8z8u042p4pNvhxdI+rr6bhsR8WXr9m
+                    5QikkkrJbkkrJI5Ezv1l1YjbpCpCQAAAAUaAo6ceS8Cd5Ryw9JEJAAAAAAAa7rlp39npbEH+9mmo/LHjL7L
+                    /wAOhoNL41+a3lj+/soa7VeDTavef6+7mDZ6Ts86oSNi0DqnWrtSqJ06fxSXSkvlj92c/U8Qx4ules/97r+
+                    n0GTL1t0hvj1ewvso0XRi4xW7d0ut7Wdzh/rM3PN+brLtfpMPJFOXogMdqDTd3RrOPyzW2vFWfqX8XFrR0v
+                    Xf26KOThVZ8ltvfqhMRqVjI+7GE/oqW8pWLteJ6e3eZj3j/hTtw3PH0n8sCpq7jFnh59yv6G6Nbgn54aZ0e
+                    ePllaWg8X/p6n9DMv1WH/OP5R+lzf4yyKWrGNllQkvq2Y+rMLa7Tx8zKuizz8qSwuouKl78qcF9TnLwSt5l
+                    e/FcMeWJn+m+nDM0+aYj+09o/UbDQ31ZSqvk+hD+lfdlDLxXLbyxsvYuGYq+ad2y4bDQpx2acFFcopJHOve
+                    153tO7oVpWkbVjZdMWQAAAAAAAAAAAAAAAApK9nbPgBoukNUMZXqzq1a1JOTyTnKy4JbskdzFxLBipFK1np
+                    7ONl4fmy3m9rR/a5hfw/j/ADcQ31U6aj/ybfoYX4vPyU/mU04THzW/iP8A1sOjdXMLRs4Uk5fFPpy8Xl3FD
+                    Nrc2Xpa3T6Qv4tHixeWOqWKqyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                    AAAAAAAAAAAAAAAAAAAA//9k=" alt="Chat Icon">
+                    <h2>CHAT</h2>
+                    <p>Monday-Saturday 9:00am-5:00pm IST</p>
+                    <p>Sunday 9:00am-12:00pm IST</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+      function redirectToLogin() {
+        window.location.href = "{{ url_for('login') }}";
+      }
+    </script>
+</body>
+</html>

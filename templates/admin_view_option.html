@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Property Management System</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTTX6g2XKM0P+tqKsCd5b3i7sHg5I2q1lLJEV/ytPL3Wgp4P/cyPfRX/2N6BzQGFKFNi9Vz0Iw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .top-bar {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
+      .top-bar .auth-links a {
+        color: white;
+        text-decoration: none;
+        margin-left: 10px;
+      }
+
+      .navbar {
+        background-color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between; /* Updated to move logo to left */
+        align-items: center;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      .navbar .logo {
+        flex-grow: 0; /* Pushes the menu to the center */
+      }
+
+      .navbar .logo h1 {
+        margin: 0;
+        color: #333;
+        font-size: 24px;
+      }
+
+      .navbar .logo span {
+        color: #4caf50;
+      }
+
+      .navbar .menu {
+        display: flex;
+        justify-content: center;
+        flex-grow: 1;
+        gap: 10px;
+      }
+
+      .navbar .menu a {
+        color: #333;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px 20px;
+        transition: color 0.3s ease;
+      }
+
+      .navbar .menu a:hover {
+        color: #4caf50;
+      }
+
+      main {
+        display: flex;
+        flex-grow: 1;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .dashboard-options {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+
+      .option-box {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        width: 200px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: 20px;
+        padding: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      .option-box:hover {
+        transform: scale(1.05);
+      }
+
+      .option-box a {
+        text-decoration: none;
+        color: #333;
+      }
+
+      .option-box a:hover h3 {
+        color: #4caf50;
+      }
+
+      .option-box i {
+        font-size: 50px;
+        color: #4caf50;
+        margin-bottom: 20px;
+      }
+
+      .option-box h3 {
+        font-size: 20px;
+        margin: 0;
+        font-weight: bold;
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="top-bar">
+        <div class="auth-links">
+          <span>Welcome, Admin</span>
+          <a href="{{ url_for('main') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+
+      <nav class="navbar">
+        <div class="logo">
+          <h1>ADMIN<span>HUB</span></h1>
+        </div>
+        <div class="menu">
+            <a href="{{ url_for('admin_dash') }}">Home</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="dashboard-options">
+        <div class="option-box">
+          <a href="{{ url_for('apartment_list') }}">
+            <i class="fas fa-home"></i>
+            <h3>Apartment</h3>
+          </a>
+        </div>
+        <div class="option-box">
+          <a href="{{ url_for('individualhouse_list') }}">
+            <i class="fas fa-info-circle"></i>
+            <h3>Individual House</h3>
+          </a>
+        </div>
+        <div class="option-box">
+          <a href="{{ url_for('land_list') }}">
+            <i class="fas fa-chart-bar"></i>
+            <h3>Land</h3>
+          </a>
+        </div>
+        <div class="option-box">
+          <a href="{{ url_for('villa_list') }}">
+            <i class="fas fa-chart-bar"></i>
+            <h3>Villa</h3>
+          </a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

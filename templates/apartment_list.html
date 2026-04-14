@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartment List - Property Management System</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTTX6g2XKM0P+tqKsCd5b3i7sHg5I2q1lLJEV/ytPL3Wgp4P/cyPfRX/2N6BzQGFKFNi9Vz0Iw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      /* CSS Styling */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .top-bar {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
+      .top-bar .auth-links a {
+        color: white;
+        text-decoration: none;
+        margin-left: 10px;
+      }
+
+      .navbar {
+        background-color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      .navbar .logo h1 {
+        margin: 0;
+        color: #333;
+        font-size: 24px;
+      }
+
+      .navbar .logo span {
+        color: #4caf50;
+      }
+
+      .navbar .menu {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .navbar .menu a {
+        color: #333;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px 20px;
+        transition: color 0.3s ease;
+      }
+
+      .navbar .menu a:hover {
+        color: #4caf50;
+      }
+
+      main {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .table-container {
+        width: 100%;
+        overflow-x: auto;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 1200px;
+        margin: 20px 0;
+        background-color: white;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        table-layout: fixed;
+      }
+
+      th, td {
+        border: 1px solid #ddd;
+        padding: 7px;
+        text-align: center;
+        word-wrap: break-word;
+      }
+
+      th {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f4f4f4;
+      }
+
+      tr:hover {
+        background-color: #ddd;
+      }
+
+      td {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      @media screen and (max-width: 768px) {
+        th, td {
+          padding: 5px;
+          font-size: 12px;
+        }
+      }
+    </style>
+</head>
+<body>
+    <header>
+      <div class="top-bar">
+        <div class="auth-links">
+          <span>Welcome, Admin</span>
+          <a href="{{ url_for('main') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+
+      <nav class="navbar">
+        <div class="logo">
+          <h1>ADMIN<span>HUB</span></h1>
+        </div>
+        <div class="menu">
+            <a href="{{ url_for('admin_view_option') }}">Previous</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+        <h1>Apartment List</h1> 
+        <table>
+          <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Sq Feet</th>
+              <th>BHK</th>
+              <th>Floor No</th>
+              <th>Total Floors</th>
+              <th>Price</th>
+              <th>Location</th>
+              <th>Nearby Facility</th>
+              <th>Outstanding Loan</th>
+              <th>Loan Amount</th>
+              <th>Loan Balance</th>
+              <th>Lender's Name</th>
+              <th>Next Repayment Date</th>
+              <th>Loan Document</th>
+              <th>Amenities</th>
+              <th>Kitchen Detail</th>
+              <th>Direction</th>
+              <th>Status</th>
+              <th>Image</th>
+              <th>Action</th>
+          </tr>
+          {% for apartment in apartments %}
+          <tr>
+              <td>{{ apartment.ApartmentID }}</td>
+              <td>{{ apartment.Name }}</td>
+              <td>{{ apartment.Phone }}</td>
+              <td>{{ apartment.Email }}</td>
+              <td>{{ apartment.SqFeet }}</td>
+              <td>{{ apartment.BHKNumber }}</td>
+              <td>{{ apartment.FloorNo }}</td>
+              <td>{{ apartment.TotalFloors }}</td>
+              <td>₹{{ apartment.Price }}</td>
+              <td>{{ apartment.Landmark }}, {{ apartment.Address }}, {{ apartment.Pincode }}</td>
+              <td>{{ apartment.NearbyFacility }}</td>
+              <td>{{ apartment.OutstandingLoan }}</td>
+              <td>
+                {% if apartment.LoanAmount %}
+                ₹{{ apartment.LoanAmount }}
+                {% else %}
+                N/A
+                {% endif %}
+              </td>
+              <td>
+                {% if apartment.LoanBalance %}
+                ₹{{ apartment.LoanBalance }}
+                {% else %}
+                N/A
+                {% endif %}
+              </td>
+              <td>
+                {% if apartment.LenderName %}
+                {{ apartment.LenderName }}
+                {% else %}
+                N/A
+                {% endif %}
+              </td>
+              <td>
+                {% if apartment.NextRepayment %}
+                {{ apartment.NextRepayment }}
+                {% else %}
+                N/A
+                {% endif %}
+              </td>
+              <td>
+                {% if apartment.LoanDocument %}
+                <img src="{{ url_for('static', filename='loan_documents/' + apartment.LoanDocument) }}" width="100" height="auto" alt="LoanDoc" />
+                <a href="{{ url_for('download_loandoc_apart', apartment_id=apartment.ApartmentID) }}" download>Download</a>
+                {% else %}
+                <span>No Image</span>
+                {% endif %}
+              </td>
+              <td>{{ apartment.Amenities }}</td>
+              <td>{{ apartment.KitchenDetail }}</td>
+              <td>{{ apartment.Direction }}</td>
+              <td>{{ apartment.Status }}</td>
+              <td>
+                {% if apartment.Image %}
+                <img src="{{ url_for('static', filename='apartments/' + apartment.Image) }}" width="100" height="auto" alt="Apartment Image" />
+                <a href="{{ url_for('download_apart', apartment_id=apartment.ApartmentID) }}" download>Download</a>
+                {% else %}
+                <span>No Image</span>
+                {% endif %}
+              </td>
+              <td>
+                <form action="{{ url_for('delete_apartment', apartment_id=apartment.ApartmentID) }}" method="post" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete this Apartment?')">Delete</button>
+                </form>
+              </td>  
+          </tr>
+          {% endfor %}
+        </table>        
+      </main>
+</body>
+</html>

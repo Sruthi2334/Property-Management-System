@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='agent.css') }}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTTX6g2XKM0P+tqKsCd5b3i7sHg5I2q1lLJEV/ytPL3Wgp4P/cyPfRX/2N6BzQGFKFNi9Vz0Iw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="top-bar">
+        <div class="auth-links">
+          {% if 'email' in session %}
+          <span>Welcome, {{ session['email'] }}!</span>
+          <!-- Assuming you store 'username' in the session -->
+          <a href="{{ url_for('logout') }}"
+            ><i class="fas fa-sign-out-alt"></i> Logout</a
+          >
+          {% else %}
+          <a href="{{ url_for('login') }}"
+            ><i class="fas fa-sign-in-alt"></i> Login</a
+          >
+          <a href="{{ url_for('register') }}"
+            ><i class="fas fa-user-plus"></i> Register</a
+          >
+          {% endif %}
+        </div>
+      </div>
+
+      <nav class="navbar">
+        <div class="logo">
+          <h1>HOME<span>HUB</span></h1>
+        </div>
+        <div class="menu">
+          <a href="{{ url_for('main') }}">Home</a>
+          <a href="{{ url_for('about') }}">About</a>
+          <a href="{{ url_for('properties') }}">Properties</a>
+          <a href="{{ url_for('agent') }}">Agent</a>
+          <a href="{{ url_for('contact') }}">Contact</a>
+        </div>
+        <div class="action-buttons"></div>
+          {% if 'email' in session %}
+              {% if session.get('role') == 'Seller' %}
+                  <a href="{{ url_for('submitproperty') }}" class="submit-property">Submit Property</a>
+              {% elif session.get('role') == 'Buyer' %}
+                  <a href="{{ url_for('maintenance_request') }}" class="maintenance-request">Maintenance Request</a>
+              {% endif %}
+          {% else %}
+              <!-- Before login, show only 'Submit Property' or 'Maintenance Request' option -->
+              <a href="{{ url_for('login') }}" class="submit-property">Submit Property</a>
+          {% endif %}
+      </div>
+      </nav>
+    </header>
+
+    <div class="header">
+      <h1>Agent</h1>
+    </div>
+
+    <div class="agent-container">
+      <div class="agent-box">
+        <img
+          src="data:image/jpeg;base64,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"
+        />
+        <h3>ABC Company</h3>
+        <p>Shradha</p>
+        <p>+91 8723564590</p>
+      </div>
+
+      <div class="agent-box">
+        <img
+          src="data:image/png;base64,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"
+        />
+        <h3>Zure Company</h3>
+        <p>Suresh</p>
+        <p>+91 6734528644</p>
+      </div>
+
+      <div class="agent-box">
+        <img
+          src="data:image/jpeg;base64,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"
+        />
+        <h3>OurLand Company</h3>
+        <p>Shivani</p>
+        <p>+91 8735948367</p>
+      </div>
+    </div>
+    <script>
+      function redirectToLogin() {
+        window.location.href = "{{ url_for('login') }}";
+      }
+    </script>
+  </body>
+</html>

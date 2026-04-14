@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Apartment - AdminHub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='submitproperty.css') }}" />
+  </head>
+  <body>
+    <header>
+        <div class="top-bar">
+            <div class="auth-links">
+              <span>Welcome, Admin</span>
+              <a href="{{ url_for('main') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+      <nav class="navbar">
+        <div class="logo">
+          <h1>ADMIN<span>HUB</span></h1>
+        </div>
+        <div class="menu">
+          <a href="{{ url_for('admin_add_option') }}">Previous</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+      <h1>Add Apartment Details</h1>
+
+      <form action="{{ url_for('apartment_add') }}" method="POST" enctype="multipart/form-data">
+        <!-- Personal Info Section -->
+        <section class="form-section">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required />
+        </section>
+
+        <!-- Apartment Details Section -->
+        <section class="form-section">
+          <label for="sqFeet">Sq Feet</label>
+          <input type="number" id="sqFeet" name="sqFeet" placeholder="Enter area in sq feet" required />
+
+          <label for="floorNo">Floor No</label>
+          <input type="number" id="floorNo" name="floorNo" placeholder="Enter floor number" required />
+
+          <label for="totalfloors">Total Floors</label>
+          <input type="number" id="totalfloors" name="totalfloors" placeholder="Enter total floors" required />
+
+          <label for="bhknumber">BHK Number</label>
+          <input type="number" id="bhknumber" name="bhknumber" placeholder="Enter BHK" required />
+
+          <label for="kitchendetail">Kitchen Details</label>
+          <select id="kitchendetail" name="kitchendetail" required>
+            <option value="select">Select</option>
+            <option value="modular">Modular</option>
+            <option value="traditional">Traditional</option>
+          </select>
+
+          <label for="direction">Facing Direction</label>
+          <select id="direction" name="direction" required>
+            <option value="select">Select</option>
+            <option value="east">East</option>
+            <option value="west">West</option>
+            <option value="north">North</option>
+            <option value="south">South</option>
+          </select>
+
+          <label for="amenties">Amenities</label>
+          <input type="text" id="amenties" name="amenties" placeholder="Enter amenities" required />
+
+          <label for="propertyImage">Image of Property</label>
+          <input type="file" id="propertyImage" name="propertyimage" accept="image/*" required />
+        </section>
+
+        <!-- Price & Location Section -->
+        <section class="form-section">
+          <label for="price">Price</label>
+          <input type="number" id="price" name="price" placeholder="Enter price" required />
+
+          <label for="landmark">Landmark</label>
+          <input type="text" id="landmark" name="landmark" placeholder="Enter landmark" required />
+
+          <label for="facility">Nearby Facility</label>
+          <select id="facility" name="nearbyfacility" required>
+            <option value="">Select Type</option>
+            <option value="hospital">Hospital</option>
+            <option value="school">School</option>
+            <option value="market">Market</option>
+            <option value="shoppingmall">Shopping Mall</option>
+          </select>
+
+          <label for="address">Address</label>
+          <input type="text" id="address" name="address" placeholder="Enter address" required />
+
+          <label for="pincode">Pincode</label>
+          <input type="number" id="pincode" name="pincode" placeholder="Enter pincode" required />
+        </section>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

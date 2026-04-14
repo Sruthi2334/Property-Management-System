@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submit Property - Villa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='submitproperty.css') }}" />
+  </head>
+  <body>
+    <header>
+      <div class="top-bar">
+        <div class="auth-links">
+          <span>Welcome, Admin</span>
+          <a href="{{ url_for('main') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+
+      <nav class="navbar">
+        <div class="logo">
+          <h1>ADMIN<span>HUB</span></h1>
+        </div>
+        <div class="menu">
+          <a href="{{ url_for('admin_add_option') }}">Previous</a>
+        </div>
+      </nav>
+
+      <h1>Submit Villa Details</h1>
+    </header>
+
+    <div class="container">
+      <form action="{{ url_for('villa_add') }}" method="POST" enctype="multipart/form-data">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
+
+        <label for="price">Price</label>
+        <input type="number" id="price" name="price" placeholder="Enter price" required />
+
+        <label for="landmark">Landmark</label>
+        <input type="text" id="landmark" name="landmark" placeholder="Enter landmark" required />
+
+        <label for="nearbyFacility">Nearby Facility</label>
+        <select id="nearbyFacility" name="nearbyfacility" required>
+          <option value="">Select Type</option>
+          <option value="hospital">Hospital</option>
+          <option value="school">School</option>
+          <option value="market">Market</option>
+          <option value="shoppingmall">Shopping Mall</option>
+        </select>
+
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" placeholder="Enter address" required />
+
+        <label for="swimmingPool">Swimming Pool</label>
+        <select id="swimmingPool" name="swimmingpool" required>
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+        </select>
+
+        <label for="parking">Parking</label>
+        <select id="parking" name="parking" required>
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+        </select>
+
+        <label for="garden">Garden Size (in sq ft)</label>
+        <input type="number" id="garden" name="garden" placeholder="Enter garden size" required />
+
+        <label for="bhkNumber">BHK Number</label>
+        <input type="number" id="bhkNumber" name="bhknumber" placeholder="Enter BHK" required />
+
+        <label for="sqFeet">Sq Feet</label>
+        <input type="number" id="sqFeet" name="sqfeet" placeholder="Enter area in sq feet" required />
+
+        <label for="status">Status</label>
+        <select id="status" name="status" required>
+          <option value="available">Available</option>
+          <option value="sold">Sold</option>
+        </select>
+
+        <label for="propertyImage">Image of Property</label>
+        <input type="file" id="propertyImage" name="propertyimage" accept="image/*" required />
+
+        <label for="totalFloors">Total Floors</label>
+        <input type="number" id="totalFloors" name="totalfloors" placeholder="Enter total floors" required />
+
+        <label for="floorNo">Floor No</label>
+        <input type="number" id="floorNo" name="floorno" placeholder="Enter floor number" required />
+
+        <label for="amenities">Amenities</label>
+        <input type="text" id="amenities" name="amenities" placeholder="Enter amenities" required />
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

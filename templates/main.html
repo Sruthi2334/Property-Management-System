@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property Management System</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='main.css') }}"
+    />
+    <link 
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTTX6g2XKM0P+tqKsCd5b3i7sHg5I2q1lLJEV/ytPL3Wgp4P/cyPfRX/2N6BzQGFKFNi9Vz0Iw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="top-bar">
+        <div class="auth-links">
+          {% if 'email' in session %}
+          <span>Welcome, {{ session['email'] }}!</span>
+          <!-- Assuming you store 'username' in the session -->
+          <a href="{{ url_for('logout') }}"
+            ><i class="fas fa-sign-out-alt"></i> Logout</a
+          >
+          {% else %}
+          <a href="{{ url_for('login') }}"
+            ><i class="fas fa-sign-in-alt"></i> Login</a
+          >
+          <a href="{{ url_for('register') }}"
+            ><i class="fas fa-user-plus"></i> Register</a
+          >
+          {% endif %}
+        </div>
+      </div>
+
+      <nav class="navbar">
+        <div class="logo">
+          <h1>HOME<span>HUB</span></h1>
+        </div>
+        <div class="menu">
+          <a href="{{ url_for('main') }}">Home</a>
+          <a href="{{ url_for('about') }}">About</a>
+          <a href="{{ url_for('properties') }}">Properties</a>
+          <a href="{{ url_for('agent') }}">Agent</a>
+          <a href="{{ url_for('contact') }}">Contact</a>
+        </div>
+        <div class="action-buttons">
+          {% if 'email' in session %}
+              {% if session.get('role') == 'Seller' %}
+                  <a href="{{ url_for('submit_option') }}" class="submit-property">Submit Property</a>
+              {% elif session.get('role') == 'Buyer' %}
+                  <a href="{{ url_for('maintenance_request') }}" class="maintenance-request">Maintenance Request</a>
+              {% endif %}
+          {% else %}
+              <!-- Before login, show only 'Submit Property' or 'Maintenance Request' option -->
+              <a href="{{ url_for('login') }}" class="submit-property">Submit Property</a>
+          {% endif %}
+      </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h2>Your PROPERTY, Your CONTROL</h2> 
+      </section>
+    </main>
+    <script>
+      function redirectToSubmitProperty() {
+        const isLoggedIn = "{{ 'email' in session }}"; // Flask injects this based on session state
+        if (isLoggedIn === "True") {
+          window.location.href = "{{ url_for('submit_option') }}"; // Redirect to Submit Property page
+        } else {
+          window.location.href = "{{ url_for('login') }}"; // Redirect to Login page
+        }
+      }
+    </script>
+  </body>
+</html>

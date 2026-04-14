@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}" />
+  </head>
+  <body>
+    <header>
+      <div class="top-bar">
+        <div class="auth-links">
+          <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+          <a href="{{ url_for('register') }}"><i class="fas fa-user-plus"></i>Register</a>
+        </div>
+      </div>
+
+      <nav class="navbar">
+        <div class="logo">
+          <h1>HOME<span>HUB</span></h1>
+        </div>
+        <div class="menu">
+          <a href="{{ url_for('main') }}">Home</a>
+          <a href="{{ url_for('about') }}">About</a>
+          <a href="{{ url_for('properties') }}">Properties</a>
+          <a href="{{ url_for('agent') }}">Agent</a>
+          <a href="{{ url_for('contact') }}">Contact</a>
+        </div>
+        <a href="{{ url_for('submit_option') }}" class="submit-property"
+          >Submit Property</a
+        >
+      </nav>
+    </header>
+
+    <!-- Registration Form Section -->
+    <section class="register-section">
+      <div class="register-container">
+        <h2>Register</h2>
+        <p>Access to our dashboard</p>
+        <form action="{{ url_for('register') }}" method="post">         <!--modified-->
+          <input type="text" placeholder="Name" name="name" required />
+          <input type="email" placeholder="Email" name="email" required />
+          <input type="tel" placeholder="Phone" name="phone" required />
+
+          <!-- Purpose Dropdown -->
+          <select name="role" required >
+            <option value="">Select Your Role*</option>
+            <option value="seller">Seller</option>
+            <option value="buyer">Buyer</option>
+          </select>
+
+          <input type="password" placeholder="Password" name="password" required />
+          
+
+          <!-- Terms and Conditions -->
+          <div class="terms">
+            <input type="checkbox" id="terms" required />
+            <label for="terms"
+              >I agree to the
+              <a href="{{ url_for('termsandcondition') }}">Terms and Conditions</a></label
+            >
+          </div>
+
+          <button type="submit">Register</button>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>

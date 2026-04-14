@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submit Property</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='submitproperty.css') }}"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+        background-color: #f4f4f4;
+        padding: 20px;
+        width: 100%;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 30px;
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 600px;
+        gap: 10px;
+      }
+
+      .submit-btn {
+        flex-grow: 1;
+        padding: 15px;
+        font-size: 18px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+      }
+
+      .submit-btn:hover {
+        background-color: #45a049;
+      }
+
+      .logo h1 {
+        color: #333;
+      }
+
+      /* Navbar styling */
+      .navbar {
+        background-color: white;
+        padding: 10px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar .logo {
+        font-size: 24px;
+      }
+
+      .navbar .menu a {
+        color: #333;
+        text-decoration: none;
+        margin-right: 20px;
+      }
+
+      .top-bar {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .top-bar a {
+        color: white;
+        margin-left: 15px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="top-bar">
+        <div class="auth-links">
+          {% if 'email' in session %}
+          <span>Welcome, {{ session['email'] }}!</span>
+          <a href="{{ url_for('logout') }}"
+            ><i class="fas fa-sign-out-alt"></i> Logout</a
+          >
+          {% else %}
+          <a href="{{ url_for('login') }}"
+            ><i class="fas fa-sign-in-alt"></i> Login</a
+          >
+          <a href="{{ url_for('register') }}"
+            ><i class="fas fa-user-plus"></i> Register</a
+          >
+          {% endif %}
+        </div>
+      </div>
+
+      <nav class="navbar">
+        <div class="logo">
+          <h1>HOME<span>HUB</span></h1>
+        </div>
+        <div class="menu">
+          <a href="{{ url_for('main') }}">Home</a>
+          <a href="{{ url_for('about') }}">About</a>
+          <a href="{{ url_for('properties') }}">Properties</a>
+          <a href="{{ url_for('agent') }}">Agent</a>
+          <a href="{{ url_for('contact') }}">Contact</a>
+        </div>
+        <a href="{{ url_for('submit_option') }}" class="submit-property"
+          >Submit Property</a
+        >
+      </nav>
+    </header>
+
+    <div class="container">
+      <h1>Select Property Type</h1>
+      <div class="button-container">
+        <a href="{{ url_for('apartment') }}" class="submit-btn">Apartment</a>
+        <a href="{{ url_for('individualhouse') }}" class="submit-btn">Individual House</a>
+        <a href="{{ url_for('land') }}" class="submit-btn">Land</a>
+        <a href="{{ url_for('villa') }}" class="submit-btn">Villa</a>
+      </div>
+    </div>
+  </body>
+</html>
