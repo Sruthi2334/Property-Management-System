@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/032/302/251/non_2x/beautiful-landscape-with-a-house-and-garden-ai-generated-free-photo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    margin: 100px auto;
+    width: 80%;
+}
+
+.header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.contact-details {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f0e4d7;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.contact-section {
+    width: 30%;
+}
+
+.contact-section img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.contact-section p {
+    margin: 5px 0;
+}

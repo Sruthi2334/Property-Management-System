@@ -1,0 +1,138 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    background: url('https://static.vecteezy.com/system/resources/previews/032/302/251/non_2x/beautiful-landscape-with-a-house-and-garden-ai-generated-free-photo.jpg') no-repeat center fixed;
+    background-size: cover;
+    height: 100%;
+}
+
+
+.top-bar {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-bar .contact-info i,
+.top-bar .auth-links a i {
+    margin-right: 5px;
+}
+.auth-links{
+    margin-left: auto;
+}
+
+.auth-links a {
+    color: white;
+    text-decoration: none;
+    margin:0;
+    padding:0;
+    display:inline-block
+}
+
+.top-bar .auth-links a:hover {
+    text-decoration: underline;
+}
+
+
+
+.navbar {
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo h1 {
+    margin: 0;
+    color: #333;
+}
+
+.logo span {
+    color: #4CAF50;
+}
+
+.menu a {
+    margin-left: 20px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    color: #4CAF50;
+}
+
+.auth-links a + a::before {
+    content: "|";
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    color: white;
+}
+
+.submit-property {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.submit-property:hover {
+    background-color: #45a049;
+} 
+
+
+.header {
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 10px;
+    font-style: normal;
+}
+
+.agent-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.agent-box {
+    background-color: white;
+    border: 3px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0 15px;
+    text-align: center;
+    width: 200px;
+}
+
+.agent-box img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.agent-box h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.agent-box p {
+    color: #666;
+    font-size: 14px;
+}

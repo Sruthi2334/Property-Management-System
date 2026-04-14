@@ -1,0 +1,152 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.top-bar {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center; 
+}
+
+.top-bar .contact-info i,
+.top-bar .auth-links a i {
+    margin-right: 5px;
+}
+.auth-links{
+    margin-left: auto;
+}
+.auth-links a {
+    color: white;
+    text-decoration: none;
+    margin:0;
+    padding:0;
+    display:inline-block
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.auth-links a + a::before {
+    content: "|";
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    color: white;
+}
+
+.navbar {
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo h1 {
+    margin: 0;
+    color: #333;
+}
+
+.logo span {
+    color: #4CAF50;
+}
+
+.menu a {
+    margin-left: 20px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    color: #4CAF50;
+}
+
+.submit-property {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.submit-property:hover { 
+    background-color: #45a049;
+}
+
+.maintenance-request {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.maintenance-request:hover {
+    background-color: #45a049;
+}
+
+.hero {
+    background-image: url('https://static.vecteezy.com/system/resources/previews/032/302/251/non_2x/beautiful-landscape-with-a-house-and-garden-ai-generated-free-photo.jpg'); /* Replace with the URL of the image */
+    /*background-size: contain;*/
+    background-position: center;
+    padding: 140px 5px; 
+    text-align: center; 
+    color: white;
+    position: relative;
+    height:50vh 
+} 
+
+.hero h2 {
+    font-size: 3em;
+    margin-bottom: 20px;
+
+}
+
+.search-bar {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+} 
+
+.search-bar form {
+    display: flex;
+    gap: 10px;
+}
+
+.search-bar select,
+.search-bar input,
+.search-bar button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.search-bar select,
+.search-bar input {
+    width: 200px;
+}
+
+.search-bar button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    width: 150px;
+    font-weight: bold;
+}
+
+.search-bar button:hover {
+    background-color: #45a049;
+}

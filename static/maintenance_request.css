@@ -1,0 +1,161 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Top Bar */
+.top-bar {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: right;
+}
+
+.auth-links a {
+    color: white;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+/* Navbar */
+.navbar {
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* Aligns logo to the left and rest to the center */
+    align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    flex: 1; /* Pushes the logo to the left */
+}
+
+.navbar .nav-links {
+    display: flex;
+    margin-left: auto; /* Pushes nav links to the right */
+    gap: 20px; /* Adds space between links */
+}
+
+.logo h1 {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+.logo span {
+    color: #4CAF50;
+}
+
+.menu {
+    flex: 20; /* Allows the menu to be centered */
+    display: flex;
+    justify-content: center;
+}
+
+.menu a {
+    margin: 0 15px; /* Adds space between the menu items */
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    color: #4CAF50;
+}
+
+.submit-btn {
+    position: relative;
+    flex: 1; /* Keeps the button aligned to the right */
+    text-align: right;
+}
+
+.submit-btn button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.submit-btn button:hover {
+    background-color: #45a049;
+}
+
+/* Form Styles */
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+h2 {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+input[type="file"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Styles for optional 'Other' issue text area */
+#otherIssueText {
+    margin-top: 10px;
+    display: none;
+}

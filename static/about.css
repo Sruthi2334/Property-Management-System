@@ -1,0 +1,160 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.top-bar {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-bar .contact-info i,
+.top-bar .auth-links a i {
+    margin-right: 5px;
+}
+.auth-links{
+    margin-left: auto;
+}
+.auth-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.auth-links a + a::before {
+    content: "|";
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    color: white;
+}
+
+.navbar {
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo h1 {
+    margin: 0;
+    color: #333;
+}
+
+.logo span {
+    color: #4CAF50;
+}
+
+.menu a {
+    margin-left: 20px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    color: #4CAF50;
+}
+
+.submit-property {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.submit-property:hover {
+    background-color: #45a049;
+}
+
+
+.about-section {
+    padding: 100px 0;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.about-section h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.about-section p {
+    font-size: 18px;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #555;
+}
+
+
+.about-section {
+    position: relative;
+    padding: 100px 0;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/032/302/251/non_2x/beautiful-landscape-with-a-house-and-garden-ai-generated-free-photo.jpg'); /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    backdrop-filter: blur(5px); /* Blurred effect */
+    text-align: center;
+    color: white;
+    min-height: 40vh; /* Ensure it covers the full viewport height */
+}
+
+
+.about-section h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #fff;
+    position: relative; /* Ensure text appears above the overlay */
+    z-index: 1;
+}
+
+.about-section p {
+    font-size: 18px; 
+    max-width: 800px;
+    margin: 0 auto;
+    color: #ddd;
+    position: relative; /* Ensure text appears above the overlay */
+    z-index: 1;
+}
+
+.about-section .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    backdrop-filter: blur(5px); /* Blurred effect */
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}

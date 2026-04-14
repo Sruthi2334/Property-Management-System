@@ -1,0 +1,159 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.top-bar {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-bar .contact-info i,
+.top-bar .auth-links a i {
+    margin-right: 5px;
+}
+.auth-links{
+    margin-left: auto;
+}
+.auth-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.auth-links a + a::before {
+    content: "|";
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    color: white;
+}
+
+.navbar {
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo h1 {
+    margin: 0;
+    color: #333;
+}
+
+.logo span {
+    color: #4CAF50;
+}
+
+.menu a {
+    margin-left: 20px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    color: #4CAF50;
+}
+
+.submit-property {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.submit-property:hover {
+    background-color: #45a049;
+}
+
+/* Registration Section */
+.register-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    padding-top: 50px;
+}
+
+.register-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 350px;
+}
+
+.register-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.register-container p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #777;
+}
+
+.register-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-container input, .register-container select {
+    margin-bottom: 15px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Terms and Conditions */
+.terms {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.terms input {
+    margin-right: 10px;
+}
+
+.terms a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.register-container button {
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.register-container button:hover {
+    background-color: #218838;
+}
